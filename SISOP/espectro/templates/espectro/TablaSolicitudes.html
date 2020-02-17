@@ -1,0 +1,27 @@
+<div class="tabla-contorno">
+    <div class="tabla-encabezado">
+        <div class="tabla-titulo">
+            Solicitudes
+        </div>
+        <div class="tabla-acciones">
+{#            {% if table_solicitudes.rows.data.0.tipo_solicitud.tipo_solicitud != 'BAJA' %}#}
+                <a class="btn btn-success" id="a_nueva_solicitud"
+                   href={% url 'espectro:nueva_solicitud' sistema.id %}
+                    {% if not perms.espectro.permisionario or not sistema.division_territorial.identificativo == user.unidad_org %}
+                        disabled=""
+                    {% endif %}>
+                    <i class="fa fa-plus"></i>&nbsp;Solicitud
+                </a>
+{#            {% endif %}#}
+        </div>
+        <div style="clear: both"></div>
+    </div>
+    <div class="tabla-body">
+        {% if table_solicitudes is not None %}
+            {% load render_table from django_tables2 %}
+            {% render_table table_solicitudes %}
+        {% else %}
+            <h4>No hay solicitudes para este sistema</h4>
+        {% endif %}
+    </div>
+</div>

@@ -1,0 +1,35 @@
+label[for='id_esta_en_uso'], #uniform-id_esta_en_uso input {
+    cursor: pointer;
+}
+
+#div_radios > div.row, #div_sistema > div.row{
+	margin-bottom:5px !important;
+	margin-left: 0!important;
+	margin-right: 0!important;
+}
+
+.form-group{
+	margin-left: 0 !important;
+	margin-right:0 !important;
+}
+
+#div_sistema .form-inline .form-control, #div_radios .form-inline .form-control{
+    width: 70%;
+}
+
+/*#div_sistema div.row:last-child{
+    margin-top: 30px;
+} */
+#div_enlace{
+    margin-top: 30px;
+}
+#div_enlace input{
+    width: 70%;
+}
+.checkbox{
+    padding-left: 0;
+}
+
+#div_radios div.checker{
+    display: none;
+}

@@ -1,0 +1,11 @@
+#div_licencia * {
+    text-align: left;
+}
+
+.row{
+    margin-bottom: 15px;
+}
+
+#div_archivo_licencia{
+    overflow: hidden;
+}

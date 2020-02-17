@@ -1,0 +1,14 @@
+/* here you can put your own css to customize and override the theme */
+
+#logo_login h1{
+    color:#ddd;
+}
+
+.form-actions{
+    border-bottom: 0!important;
+}
+
+#btn_login{
+    width: 70%;
+    float: none!important;
+}

@@ -1,0 +1,74 @@
+<input name="fecha_ultima_sol" id="id_fecha_ultima_sol" type="hidden" value={{ fecha_ultima_sol }}>{#si la solicitud es de baja de muestra la alerta, no se debe compara con la pk#}
+
+{% if sistema.id %}
+    <div class="alert alert-warning alert-dismissable" id="id_mensaje_alerta_solicitud_baja" style="display: none">
+    {#<button type="button" class="close" data-dismiss="alert">&times;</button>#}
+    <strong>¡Alerta!</strong> Si la solicitud de baja es autorizada por el Ministerio, se eliminará este sistema de los registros.
+</div>
+{% endif %}
+
+<p><strong>Estado de la Solicitud</strong></p>
+{{ solicitud_form.non_field_errors }}
+<div class="row">
+    <div class="col-md-12">
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" id="cbx_solicitud_enviada" name="ncbx_solicitud_enviada"
+                        {{ attr_checked_cbx_solicitud_enviada }} {{ attr_disabled_cbx_solicitud_enviada }}>
+                Enviada por la División Territorial
+            </label>
+        </div>
+    </div>
+</div>
+<div class="row" id="div_row_tipo_solicitud">
+    <div class="col-md-12 col-md-offset-1" id="div_tipo_solicitud">
+        {{solicitud_form.tipo_solicitud.label_tag }}
+        {{solicitud_form.tipo_solicitud}}
+    </div>
+     {% if attr_checked_cbx_solicitud_enviada == 'checked' %}
+         {{ solicitud_form.tipo_solicitud.errors }}
+     {% endif %}
+</div>
+<div class="row">
+    <div id="div_fecha_envio" class="col-md-6 col-md-offset-1">
+        <div class="input-group date input-group-sm" data-provide="datepicker" id="calendar_fecha_envio">
+            {{ solicitud_form.fecha_envio }}
+            <div class="input-group-addon">
+                <span class="fa fa-calendar"></span>
+            </div>
+        </div>
+        {% if attr_checked_cbx_solicitud_enviada == 'checked' %}
+            {{ solicitud_form.fecha_envio.errors }}
+        {% endif %}
+    </div>
+</div>
+<div class="row" id="parent_div_archivo_solicitud">
+    <div class="col-md-12 col-md-offset-1"><p><strong>Archivo:</strong></p></div>
+    <div class="col-md-10 col-md-offset-1" id="div_archivo_solicitud">
+        {{ solicitud_form.archivo_solicitud }}
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12" id="div_cbx_solicitud_autorizada">
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" id="cbx_solicitud_autorizada" name="ncbx_solicitud_autorizada"
+                        {{ attr_checked_cbx_solicitud_autorizada }} {{ attr_disabled_cbx_solicitud_autorizada}}>
+                Autorizada por el Ministerio
+            </label>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6 col-md-offset-1" id="div_fecha_autorizacion">
+        <div class="input-group date input-group-sm" data-provide="datepicker" id="calendar_fecha_autorizacion">
+            {{ solicitud_form.fecha_autorizacion }}
+            <div class="input-group-addon">
+                <span class="fa fa-calendar"></span>
+            </div>
+        </div>
+        {% if attr_checked_cbx_solicitud_enviada == 'checked' and attr_checked_cbx_solicitud_autorizada == 'checked' %}
+            {{ solicitud_form.fecha_autorizacion.errors }}
+        {% endif %}
+    </div>
+</div>

@@ -1,0 +1,76 @@
+<!--HEREDANDO DE LA PLANTILLA BASE-->
+{% extends 'general/Base.html' %}
+<!-- END HEREDANDO DE LA PLANTILLA BASE-->
+
+<!--ADICIONDO TITULO-->
+{% block titulo %}
+        Nuevo Sistema
+{% endblock %}
+<!--END ADICIONDO TITULO-->
+
+<!--ADICIONDO CSS, JS-->
+{% load static %}
+{% block css %}
+    <link href="{% static 'espectro/css/nuevo_sistema.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'espectro/css/sistema.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'espectro/css/solicitud.css' %}" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'espectro/scripts/nuevo_sistema.js' %}" type="text/javascript"></script>
+    <script src="{% static 'espectro/scripts/sistema.js' %}" type="text/javascript"></script>
+    <script src="{% static 'espectro/scripts/solicitud.js' %}" type="text/javascript"></script>
+    <script src="{% static 'espectro/scripts/licencia.js' %}" type="text/javascript"></script>
+{% endblock %}
+<!--END ADICIONDO CSS, JS-->
+
+<!--ADICIONANDO TITULO BREADCRUMB DE LA PAGINA-->>
+{% block title_page_breadcrumb %}
+<h3 class="page-title">	Nuevo Sistema </h3>
+
+<ul class="page-breadcrumb breadcrumb">
+	<li>
+		<i class="fa fa-home"></i>
+			<a href="{% url 'espectro:listado sistemas' 1 %}">Espectro Radioeléctrico</a>
+		<i class="fa fa-angle-right"></i>
+	</li>
+	<li>
+		<a href="#">Nuevo Sistema</a>
+	</li>
+</ul>
+{% endblock %}
+<!--END ADICIONANDO TITULO BREADCRUMB DE LA PAGINA-->>
+
+<!--ADICIONADO CONTENIDO DE LA PAGINA-->
+
+{% block content %}
+    <form class="form-horizontal" action="{% url 'espectro:nuevo_sistema' %}" method="post" enctype="multipart/form-data" role="form" id="form_pricipal">
+        {%csrf_token%}
+        <div class="row">
+            <div class="col-md-12">
+                {% include 'espectro/Sistema.html' %}
+            </div>
+        </div>
+        <hr class="linea-gruesa">
+        <div class="row">
+            <div class="col-md-6" id="div_solicitud">
+                {% include 'espectro/Solicitud.html' %}
+            </div>
+            <div class="col-md-6" id="div_licencia">
+                {% include 'espectro/Licencia.html' %}
+            </div>
+        </div>
+        <div class="row" id="div_submit">
+            <div class="col-md-4 col-md-offset-8">
+                <input type="submit" value="Guardar e Insertar otro" class="btn btn-primary" id="btn_guardar_e_insertar" name="nbtn_guardar_e_insertar" />
+                <input type="submit" value="Guardar y Listar" class="btn btn-primary" id="btn_guardar_y_listar" name="nbtn_guardar_y_listar" />
+            </div>
+        </div>
+      </form>
+
+{% endblock %}
+<!-- END ADICIONADO CONTENIDO DE LA PAGINA-->
+
+<!--ADICIONADO NOTIFICACION DE LA PAGINA-->
+{% block notify %}{{ notify }}{% endblock %}
+<!--END ADICIONANDO NOTIFICACION DE LA PAGINA-->

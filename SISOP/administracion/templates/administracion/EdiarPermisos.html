@@ -1,0 +1,22 @@
+<form class="form-horizontal" action="{% url 'administracion:editar_permisos' usuario.id %}"
+      method="post" enctype="multipart/form-data" role="form" id="editar_permisos">
+    {%csrf_token%}
+    <p><strong>Usuario: {{ usuario.usuario }}</strong></p>
+    {% for app_perms in app_perm_acces %}
+        {% for app, perms in app_perms.items %}
+            <div class="row">
+                <div class="col-md-3">
+                    <p><strong style="line-height: 2.1">{{ app }}:</strong></p>
+                </div>
+                <div class="col-md-3" id="div_perm_{{ app }}">
+                    <select id="select_perm_{{ app }}" class="selectpicker" multiple data-actions-box="true" name="{{ app }}"
+                            data-deselect-all-text="Ninguno" data-select-all-text="Todos" data-none-selected-text="Ninguno">
+                        {% for key, value in perms.items %}
+                            <option {{value}} data-original-index="{{ value }}">{{key}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+        {% endfor %}
+    {% endfor %}
+</form>

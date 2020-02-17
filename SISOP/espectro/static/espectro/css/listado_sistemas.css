@@ -1,0 +1,80 @@
+#div_breadcrumb{
+    padding-right: 0;
+}
+div.actions{
+    padding-left: 0 !important;
+}
+div.actions a {
+    width: 100%;
+}
+ul.page-breadcrumb.breadcrumb{
+    margin-top: 0!important;
+    padding-bottom: 6px;
+}
+
+#div_encabezado_busqueda{
+    overflow: auto;
+    min-height: 500px;
+}
+#div_encabezado_busqueda span{
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+#a_search{
+    padding-bottom: 5px;
+}
+
+#div_municipios button[data-id="select_municipios"], #div_per_page button[data-id="select_per_page"]{
+    padding-top: 3px;
+    padding-bottom: 3px;
+    font-size: 13px;
+}
+#div_municipios li[data-original-index] a{
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+#li_a_aceptar{
+    border-top-style: solid;
+    border-top-width: 1px;
+    border-color: #e5e5e5;
+
+}
+
+#a_aceptar_list_mun{
+    margin-top: 2px;
+    margin-right: 1px;
+    margin-bottom: 1px;
+    float: right;
+    width: 50%;
+}
+.input-group[class*="col-"]{
+    padding-right: 15px;
+}
+
+#div_exportar{
+    padding-right: 15px;
+}
+#a_exportar{
+    padding-bottom: 4px;
+    text-decoration: none;
+}
+
+.table{
+    margin-bottom: 10px;
+}
+
+ul.pagination{
+    margin-top: 0;
+}
+li.cardinality{
+    line-height: 2.1;
+    margin-left: 5px;
+}
+
+.indicador-ordenar{
+    color: #0d638f;
+    padding-left: 2px;
+    /*float: right;*/
+    font-size: 15px;
+}

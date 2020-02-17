@@ -1,0 +1,49 @@
+<p><strong>Ultima Licencia</strong></p>
+{{ licencia_form.non_field_errors }}
+<input value={{licencia_form.instance.id}} type="hidden" name="id_licencia">
+<input name="fecha_ultima_lic" id="id_fecha_ultima_lic" type="hidden" value={{ fecha_ultima_lic }}>
+
+<div class="row">
+    <div class="col-md-6 col-md-offset-1">
+        {{ licencia_form.licencia }}
+        {% if attr_checked_cbx_solicitud_enviada == 'checked' and attr_checked_cbx_solicitud_autorizada == 'checked' and solicitud_form.tipo_solicitud.value != 3 %}
+            {{ licencia_form.licencia.errors}}
+        {% endif %}
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6 col-md-offset-1">
+        <div class="input-group date input-group-sm" data-provide="datepicker" id="calendar_fecha_emision">
+            {{  licencia_form.fecha_emision }}
+            <div class="input-group-addon">
+                <span class="fa fa-calendar"></span>
+            </div>
+        </div>
+       {% if attr_checked_cbx_solicitud_enviada == 'checked' and attr_checked_cbx_solicitud_autorizada == 'checked' and solicitud_form.tipo_solicitud.value != 3 %}
+            {{  licencia_form.fecha_emision.errors }}
+        {% endif %}
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6 col-md-offset-1">
+        <div class="input-group date input-group-sm" data-provide="datepicker" id="calendar_fecha_vencimiento">
+            {{  licencia_form.fecha_vencimiento }}
+            <div class="input-group-addon">
+                <span class="fa fa-calendar"></span>
+            </div>
+        </div>
+        {% if attr_checked_cbx_solicitud_enviada == 'checked' and attr_checked_cbx_solicitud_autorizada == 'checked' and solicitud_form.tipo_solicitud.value != 3 %}
+            {{  licencia_form.fecha_vencimiento.errors }}
+        {% endif %}
+    </div>
+</div>
+<div class="row" id="parent_div_archivo_licencia">
+    <div class="col-md-12 col-md-offset-1"><p><strong>Archivo:</strong></p></div>
+    <div class="col-md-10 col-md-offset-1" id="div_archivo_licencia">
+        {{ licencia_form.archivo_licencia }}
+        {{ licencia_form.archivo_licencia.errors }}
+    </div>
+    {% if attr_checked_cbx_solicitud_enviada == 'checked' and attr_checked_cbx_solicitud_autorizada == 'checked' and solicitud_form.tipo_solicitud.value != 3 %}
+        {{  licencia_form.archivo_licencia.errors }}
+    {% endif %}
+</div>

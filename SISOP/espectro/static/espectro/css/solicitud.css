@@ -1,0 +1,21 @@
+#div_solicitud *{
+    text-align: left;
+}
+
+#id_tipo_solicitud{
+    width: 150px;
+}
+
+.row{
+    margin-bottom: 15px;
+}
+
+#div_archivo_solicitud{
+    overflow: hidden;
+}
+.disabled-server{
+    background-color: #F4F4F4 !important;
+}
+input[readonly].disabled-server{
+    background-color: #F4F4F4 !important;
+}

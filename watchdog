@@ -1,0 +1,156 @@
+#!/bin/sh -e
+# =========================================================
+#  watchdog - Starts the watchdog to monitor file system events.
+# =========================================================
+
+#:Usage: /etc/init.d/watch_dog {start|stop|restart|status}
+
+
+WATCHDOG_USER="root"
+WATCHDOG_GROUP="root"
+
+DEFAULT_PID_DIR="/var/run/watchdog"
+DEFAULT_PID_FILE="/var/run/watchdog/watchdog.pid"
+DEFAULT_LOG_DIR="/var/log/watchdog"
+DEFAULT_LOG_FILE="/var/log/watchdog/watchdog.log"
+DEFAULT_LOG_LEVEL="INFO"
+
+SCRIPT_TO_EXECUTE='/var/www/vhosts/SISOP/watch_dog.py'
+PYTHON_TO_USE='/var/www/vhosts/SISOP/venvSISOP/bin/python3.6'
+
+create_default_dir() {
+    if [ ! -d "$1" ]; then
+        echo "- Creating default directory: '$1'"
+        mkdir -p "$1"
+        echo "- Changing permissions of '$1' to 02755"
+        chmod 02755 "$1"
+        if [ -n "$WATCHDOG_USER" ]; then
+            echo "- Changing owner of '$1' to '$WATCHDOG_USER'"
+            chown "$WATCHDOG_USER" "$1"
+        fi
+        if [ -n "$WATCHDOG_GROUP" ]; then
+            echo "- Changing group of '$1' to '$WATCHDOG_GROUP'"
+            chgrp "$WATCHDOG_GROUP" "$1"
+        fi
+    fi
+}
+
+check_paths() {
+    if [ ! -d "$DEFAULT_LOG_DIR" ]; then
+        create_default_dir "$DEFAULT_LOG_DIR"
+    fi
+    if [ ! -d "$DEFAULT_PID_DIR" ]; then
+        create_default_dir "$DEFAULT_PID_DIR"
+    fi
+}
+
+
+create_paths () {
+    create_default_dir "$DEFAULT_LOG_DIR"
+    create_default_dir "$DEFAULT_PID_DIR"
+}
+
+is_running() {
+    pid=$1
+    ps $pid > /dev/null 2>&1
+}
+
+wait_pid () {
+    pid=$1
+    forever=1
+    i=0
+    while [ $forever -gt 0 ]; do
+        if ! is_running $pid; then
+            echo "OK"
+            forever=0
+        else
+            kill -TERM "$pid"
+            i=$((i + 1))
+            if [ $i -gt 60 ]; then
+                echo "ERROR"
+                echo "Timed out while stopping (30s)"
+                forever=0
+            else
+                sleep 0.5
+            fi
+        fi
+    done
+}
+
+stop_beat () {
+    echo -n "Stopping watchdog... "
+    if [ -f "$DEFAULT_PID_FILE" ]; then
+        wait_pid $(cat "$DEFAULT_PID_FILE")
+    else
+        echo "NOT RUNNING"
+    fi
+}
+
+start_beat () {
+    echo "Starting watchdog..."
+    "$PYTHON_TO_USE" $SCRIPT_TO_EXECUTE > /dev/null 2>&1 & echo $! > "$DEFAULT_PID_FILE"
+	  now=`date '+%d/%m/%Y %H:%M:%S'`
+    echo " [ $now ] watch dog is ready ..." >>  "$DEFAULT_LOG_FILE"
+	echo "Ready watchdog..."
+}
+
+check_status () {
+    local failed=
+    local pid_file=$DEFAULT_PID_FILE
+    if [ ! -e $pid_file ]; then
+        echo "${SCRIPT_NAME} is down: no pid file found"
+        failed=true
+    elif [ ! -r $pid_file ]; then
+        echo "${SCRIPT_NAME} is in unknown state, user cannot read pid file."
+        failed=true
+    else
+        local pid=`cat "$pid_file"`
+        local cleaned_pid=`echo "$pid" | sed -e 's/[^0-9]//g'`
+        if [ -z "$pid" ] || [ "$cleaned_pid" != "$pid" ]; then
+            echo "${SCRIPT_NAME}: bad pid file ($pid_file)"
+            failed=true
+        else
+            local failed=
+            kill -0 $pid 2> /dev/null || failed=true
+            if [ "$failed" ]; then
+                echo "${SCRIPT_NAME} (pid $pid) is down, but pid file exists!"
+                failed=true
+            else
+                echo "${SCRIPT_NAME} (pid $pid) is up..."
+            fi
+        fi
+    fi
+
+    [ "$failed" ] && exit 1 || exit 0
+}
+
+case "$1" in
+    start)
+        check_paths
+        start_beat
+    ;;
+    stop)
+        check_paths
+        stop_beat
+    ;;
+    status)
+        check_status
+    ;;
+    restart)
+        echo "Restarting watchdog"
+        check_paths
+        stop_beat && start_beat
+    ;;
+    create-paths)
+        create_paths
+    ;;
+    check-paths)
+        check_paths
+    ;;
+    *)
+        echo "Usage: /etc/init.d/${SCRIPT_NAME} {start|stop|restart|status}"
+        exit 64  # EX_USAGE
+    ;;
+esac
+
+exit 0

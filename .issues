@@ -1,0 +1,16 @@
+1.	Opción de actualizar el sistema, las solicitudes, las licencias,
+2.	Controlar la excepción cuando el correo no es único, y los campos requeridos. (ver exception para campos únicos y campos requeridos)
+3.	Revisar la función handleRegister del login.js
+4.	Después del logout limpiar el historial del navegador para evitar ir a la página anterior con el botón back del navegador.
+5.	Adicionar los campos a UserModel CTP y CTA, no serán obligatorios.
+6.	Revisar autenticación con LDAP
+7.	Realizar job para eliminar los registros en la tabla sesión que se van quedando cuando no se produce logout manual.
+8.	Cerrar la sesión después de un tiempo de inactividad.
+9.	Controlar de Gateway timeout
+10.	Hacer una página de inicio
+11.	Verificar que los elementos subidos (solicitudes y licencias no sean códigos)
+12.	Poner en la bitácora cuando algún error de envío de email.
+13.	Poner en la tabla sistemas un link descargar licencia.
+14.	Poner el ordenamiento por defecto en la tabla  sistema, ultima licencia y despues por enlace.
+15.	Mover todos los css de listado_sistema para table_general.css
+16. cuando se modifique el fichero sisop.conf.xml que se reinicie celery y httpd

@@ -1,0 +1,24 @@
+#div_pago_sistemas ul.typeahead {
+    height: auto;
+    max-height: 400px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: 200px;
+}
+
+#div_btn-eliminar .delete-form{
+    position: absolute;
+    margin-left: 15px;
+}
+
+#div_sistemas > .row div{
+    padding-right: 0;
+}
+
+#div_title_sistemas_pagar{
+    margin-right: -78px;
+}
+
+#btn_adicionar_sistema{
+    float: right;
+}

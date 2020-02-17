@@ -1,0 +1,103 @@
+{% if pago_form.non_field_errors %}
+    <div class="alert alert-danger" id="alert2" style="display: {{ display }}">
+        <button class="close" data-close="alert"></button>
+        <span>
+            {{ pago_form.non_field_errors}}
+        </span>
+    </div>
+{% endif %}
+<div class="row">
+    <p><strong>Datos del Pago</strong></p>
+    <div class="col-md-2">
+        {{ pago_form.no_notificacion }}
+        {{ pago_form.no_notificacion.errors }}
+    </div>
+    <div class="col-md-2">
+        <div class="input-group date input-group-sm" data-provide="datepicker" id="calendar_fecha_notificacion">
+            {{ pago_form.fecha_notificacion }}
+            <div class="input-group-addon">
+                <span class="fa fa-calendar"></span>
+            </div>
+        </div>
+        {{ pago_form.fecha_notificacion.errors }}
+    </div>
+    <div class="col-md-2">
+        {{ pago_form.valor_total }}
+        {{ pago_form.valor_total.errors }}
+    </div>
+    <div class="col-md-4">
+        {{ pago_form.archivo_pago }}
+        {{ pago_form.archivo_pago.errors }}
+    </div>
+</div>
+
+<div id=div_pago_sistemas class="row">
+    {{ pago_sistemas_formset.management_form }}
+    <div class="row" id="div_title_sistemas_pagar">
+        <div class="col-md-3">
+          <p><strong>Sistemas a pagar:</strong></p>
+        </div>
+        <div class="col-md-3 col-md-offset-6">
+            <button id="btn_adicionar_sistema" class="btn btn-success btn-sm">Adicionar Sistema</button>
+        </div>
+    </div>
+    <div id="div_sistemas">
+        <div id="div_aux"></div>
+        {% for form in pago_sistemas_formset %}
+            <div id="div_{{ form.prefix }}" class="row form-inline form-dinamico">
+                 {{ form.id }}
+                <div>
+                    {{ form.DELETE }}
+                </div>
+                <div class="col-md-2" id="div_{{ form.prefix }}">
+                    {{ form.sistema }}
+                    {{ form.sistema.errors}}
+                </div>
+                <div class="col-sm-2">
+                    {{ form.enlace }}
+                    {{ form.enlace.errors}}
+                </div>
+                <div class="col-md-2">
+                    {{ form.tipo_sistema }}
+                    {{ form.tipo_sistema.errors}}
+                </div>
+                <div class="col-md-2">
+                    {{ form.valor_total }}
+                    {{ form.valor_total.errors}}
+                </div>
+                <div class="col-md-2">
+                    <div class="input-group date input-group-sm" data-provide="datepicker" id="dp_f_i-{{ form.prefix }}">
+                        {{ form.fecha_inicio_pago }}
+                        <div class="input-group-addon">
+                        <span class="fa fa-calendar"></span>
+                    </div>
+                </div>
+                    {{ form.fecha_inicio_pago.errors}}
+                </div>
+                <div class="col-md-2" id="div_btn-eliminar">
+                    <div>
+                        <div class="col-md-11">
+                            {{ form.meses_diferir }}
+                            {{ form.meses_diferir.errors}}
+                        </div>
+                        <div class="col-md-1">
+                            <button id="btn_delete_{{ form.prefix }}" type="button" class="btn btn-danger btn-sm delete-form">
+                                <i class="glyphicon glyphicon-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+{#                    {{ form.meses_diferir }}#}
+{#                    {{ form.meses_diferir.errors}}#}
+{#                     <button id="btn_delete_{{ form.prefix }}" type="button" class="btn btn-danger btn-sm delete-form">#}
+{#                        <i class="glyphicon glyphicon-minus"></i>#}
+{#                    </button>#}
+                </div>
+{#                <div class="col-md-1">#}
+{#                    <button id="btn_delete_{{ form.prefix }}" type="button" class="btn btn-danger btn-sm delete-form">#}
+{#                        <i class="glyphicon glyphicon-minus"></i>#}
+{#                    </button>#}
+{#                </div>#}
+             </div>
+        {%endfor%}
+    </div>
+</div>

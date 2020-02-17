@@ -1,0 +1,26 @@
+<div class="tabla-contorno">
+    <div class="tabla-encabezado">
+        <div class="tabla-titulo">
+            Licencias para solicitud sombreada
+        </div>
+        {% if table_licencias is not None %}
+            <div class="tabla-acciones">
+                <a href="#" class="btn btn-success" id="a_nueva_lic"
+                    {% if not perms.espectro.permisionario or not sistema.division_territorial.identificativo == user.unidad_org %}
+                        disabled=""
+                    {% endif %}>
+                    <i class="fa fa-plus"></i>&nbspLicencia</a>
+            </div>
+        {% endif %}
+        <div style="clear: both"></div>
+    </div>
+    <div class="tabla-body">
+        {% if table_licencias is not None  %}
+            {% load render_table from django_tables2 %}
+            {% render_table table_licencias %}
+        {% else %}
+            <h4>No hay licencias para esta solicitud</h4>
+        {% endif %}
+    </div>
+    {% include 'general/Notificacion.html' %}
+</div>

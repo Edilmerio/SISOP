@@ -1,0 +1,68 @@
+<!--HEREDANDO DE LA PLANTILLA BASE-->
+{% extends 'general/Base.html' %}
+<!-- END HEREDANDO DE LA PLANTILLA BASE-->
+
+<!--ADICIONDO TITULO-->
+{% block titulo %}
+        Listado de usuarios
+{% endblock %}
+<!--END ADICIONDO TITULO-->
+
+<!--ADICIONDO CSS, JS-->
+{% load static %}
+{% block css %}
+    <link href="{% static 'administracion/css/listado_usuarios.css' %}" rel="stylesheet" type="text/css"/>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'administracion/scripts/table_usuarios.js' %}" type="text/javascript"></script>
+    <script src="{% static 'administracion/scripts/listado_usuarios.js' %}"></script>
+{% endblock %}
+<!--END ADICIONDO CSS, JS-->
+
+<!--ADICIONANDO TITULO BREADCRUMB DE LA PAGINA-->>
+{% block title_page_breadcrumb %}
+<h3 class="page-title">	Listado de Usuarios </h3>
+
+<ul class="page-breadcrumb breadcrumb">
+	<li>
+		<i class="fa fa-home"></i>
+			<a href="{% url 'administracion:listado usuarios' %}">Administración</a>
+		<i class="fa fa-angle-right"></i>
+	</li>
+	<li>
+		<a href="#">Listado de Usuarios</a>
+	</li>
+</ul>
+{% endblock %}
+<!--END ADICIONANDO TITULO BREADCRUMB DE LA PAGINA-->>
+
+<!--ADICIONADO CONTENIDO DE LA PAGINA-->
+
+{% block content %}
+    <div class="row" id="div_encabezado_busqueda">
+    <div class="col-md-3">
+        <p><strong>Usuarios del sistema</strong></p>
+    </div>
+    <div class="col-md-3 pull-right input-group">
+        <input type="text" placeholder="usuario" class="form-control input-sm" id="input_search" value="{{ busqueda }}"/>
+        <span class="input-group-addon">
+            <a href="#" class="btn fa fa-search" id="a_search"></a>
+        </span>
+    </div>
+    <div class="col-md-12 table-responsive">
+        {% if table is not None %}
+            {% load render_table from django_tables2 %}
+            {% render_table table %}
+        {% else %}
+            <h1>No hay resultados que mostrar</h1>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}
+<!-- END ADICIONADO CONTENIDO DE LA PAGINA-->
+
+<!--ADICIONADO NOTIFICACION DE LA PAGINA-->
+{% block notify %}{{ notify }}{% endblock %}
+<!--END ADICIONANDO NOTIFICACION DE LA PAGINA-->

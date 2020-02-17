@@ -1,0 +1,54 @@
+### Python ###
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+
+# C extensions
+*.so
+
+### Django ###
+*.log
+*.pot
+*.pyc
+__pycache__/
+
+### vitual enviroment ###
+venvSISOP/
+
+### database ###
+db.sqlite3
+
+### Pycharm ###
+.idea/
+
+### node_modules ###
+node_modules
+
+### static ###
+static
+### except SISOP/**/static##
+!SISOP/**/static
+
+### file temp ###
+temp
+
+### file Uploads ###
+uploads
+
+###data users###
+usuarios
+
+### celery files###
+celerybeat-schedule*
+
+### secret key ###
+file_secret_key
+
+### data generated ###
+~*
+
+### sisop configuracion personaliada ###
+sisop.conf.xml
+
+### log SISOP ###
+log

@@ -1,0 +1,18 @@
+{% load custom_filters %}
+
+{#<p>{{ b|get_item_dict:'a' }}</p>#}
+{#{% if now|time > hours_day|get_item_dict:'hour0' and now|time < hours_day|get_item_dict:'hour12' %}#}
+{#    <h3>Buenos días....</h3>#}
+{#{% elif now|time >= hours_day|get_item_dict:'hour12' and now|time < hours_day|get_item_dict:'hour19' %}#}
+{#    <h3>Buenos tardes....</h3>#}
+{#{% elif now|time >= hours_day|get_item_dict:'hour19' and now|time < hours_day|get_item_dict:'hour24' %}#}
+{#    <h3>Buenos noches....</h3>#}
+{#{% else %}#}
+{#    <h3>Buenos noches....otro</h3>#}
+{#{% endif %}#}
+<p>{{ hours_day|get_item_dict:'hour0'|time:'H' }}</p>
+<p>{{  now|time:"H:i" }}</p>
+
+{% if hours_day|get_item_dict:'hour0' > now|time:"H:i" %}
+    <p>ok</p>
+{% endif %}

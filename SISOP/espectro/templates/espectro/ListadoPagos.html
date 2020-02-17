@@ -1,0 +1,126 @@
+<!--HEREDANDO DE LA PLANTILLA BASE-->
+{% extends 'general/Base.html' %}
+<!-- END HEREDANDO DE LA PLANTILLA BASE-->
+<!--ADICIONDO CSS, JS-->
+
+<!--ADICIONDO TITULO-->
+{% block titulo %}
+        Listados de Pagos
+{% endblock %}
+<!--END ADICIONDO TITULO-->
+{% load static %}
+{% block scripts %}
+    <script src="{% static 'bootstrap-3-typeahead/bootstrap3-typeahead.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'espectro/scripts/table_general.js' %}" type="text/javascript"></script>
+    <script src="{% static 'general/scripts/subcripcion.js' %}" type="text/javascript"></script>
+    <script src="{%  static 'espectro/scripts/pago.js' %}" type="text/javascript"></script>
+    <script src="{%  static 'espectro/scripts/listado_pagos.js' %}" type="text/javascript"></script>
+    <script src="{%  static 'espectro/scripts/modal_general_operaciones_pago.js' %}" type="text/javascript"></script>
+    <script src="{%  static 'general/scripts/formset_django.js' %}" type="text/javascript"></script>
+{% endblock %}
+{% block css %}
+	<link href="{% static 'espectro/css/listado_sistemas.css' %}" rel="stylesheet" type="text/css"/>
+	<link href="{% static 'espectro/css/modal_general_operaciones_pago.css' %}" rel="stylesheet" type="text/css"/>
+	<link href="{% static 'espectro/css/pago.css' %}" rel="stylesheet" type="text/css"/>
+{% endblock %}
+<!--END ADICIONDO CSS, JS-->
+
+<!--ADICIONANDO TITULO BREADCRUMB DE LA PAGINA-->>
+{% block title_page_breadcrumb %}
+    <div class="row">
+        <div class="col-md-6">
+            <h3 class="page-title">	Pagos </h3>
+        </div>
+{#        <div class="col-md-6">#}
+{#             {% include 'general/ASubcripcion.html' with href_subcripcion='/general/subcripcion/0' %}#}
+{#        </div>#}
+    </div>
+    <div class="row">
+        <div class="col-md-10" id="div_breadcrumb">
+            <ul class="page-breadcrumb breadcrumb">
+	            <li>
+		            <i class="fa fa-home"></i>
+			        <a href="{% url 'espectro:listado sistemas' 1 %}">Espectro Radioeléctrico</a>
+		            <i class="fa fa-angle-right"></i>
+	            </li>
+	            <li>
+		            <a href="#">Pagos</a>
+	            </li>
+            </ul>
+        </div>
+        <div class="col-md-2 actions">
+             <a class="btn btn-primary pull-right" href="{% url 'espectro:nuevo_pago'%}" id="a_nuevo_pago"
+                {% if not perms.espectro.permisionario %} disabled="" {% endif %}> Insertar Nuevo Pago </a>
+        </div>
+    </div>
+{% endblock %}
+<!--END ADICIONANDO TITULO BREADCRUMB DE LA PAGINA-->>
+
+<!--ADICIONADO CONTENIDO DE LA PAGINA-->
+{% block content %}
+<div class="row" id="div_encabezado_busqueda">
+    <ul class="nav nav-tabs">
+        <li {% if request.path == '/espectro/listado_pagos/1'%} class="active" {% endif %}><a href="{% url 'espectro:listado pagos' 1 %}">Pagos en Proceso</a></li>
+        <li {% if request.path == '/espectro/listado_pagos/0'%} class="active" {% endif %}><a href="{% url 'espectro:listado pagos' 0 %}">Pagos Terminados</a></li>
+        <!--<li><a href="#">Mensajes</a></li> -->
+    </ul>
+    <div class="col-md-2">
+        {% if request.path == '/espectro/listado_pagos/1' %}
+            <p><strong>Pagos en Proceso ({{ cant_elem }})</strong></p>
+        {% endif %}
+        {% if request.path == '/espectro/listado_pagos/0' %}
+            <p><strong>Pagos Terminados ({{ cant_elem }})</strong></p>
+        {% endif %}
+    </div>
+
+    <div class="pull-right" id="div_exportar">
+        <a href="#" class="btn-sm btn-primary pull-right" id="a_exportar">
+            <i class="fa fa-arrow-down"></i>
+            Exportar
+        </a>
+        <i class="clean"></i>
+    </div>
+
+    <div class="col-md-3 pull-right input-group">
+        <input type="text" placeholder="No.Pago o Sistema" class="form-control input-sm" id="input_search" value="{{ busqueda }}"/>
+        <span class="input-group-addon">
+            <a href="#" class="btn fa fa-search" id="a_search"></a>
+        </span>
+    </div>
+    {% if municipio_dt_dict %}
+        <div class="col-md-3 pull-right los" id="div_municipios">
+            <select id="select_municipios" class="selectpicker" multiple data-actions-box="true"
+                    data-deselect-all-text="Ninguno" data-select-all-text="Todos" data-none-selected-text="Ninguno">
+                {% for key, value in municipio_dt_dict.items|dictsort:0 %}
+                    <option {{value}} data-original-index="{{ value }}">{{key}}</option>
+                {% endfor %}
+            </select>
+        </div>
+    {% endif %}
+
+    <div class="pull-right col-md-2" id="div_per_page">
+        <select id="select_per_page" class="pull-right selectpicker" data-width="50%">
+            {% for key, value in dict_per_page.items %}
+                <option {{value}} data-original-index="{{ value }}">{{key}}</option>
+            {% endfor %}
+        </select>
+        <label for="select_per_page" class="pull-right">Mostar:&nbsp</label>
+    </div>
+    <div class="col-md-12 table-responsive">
+        {% if table.cant_rows > 0 %}
+            {% load render_table from django_tables2 %}
+            {% render_table table %}
+        {% else %}
+            <h1>No hay resultados que mostrar</h1>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}
+<!-- END ADICIONADO CONTENIDO DE LA PAGINA-->
+
+<!--ADICIONADO NOTIFICACION DE LA PAGINA-->
+{% if notify %}
+{% block notify %}{{ notify }}{% endblock %}
+{% endif %}
+<!--END ADICIONANDO NOTIFICACION DE LA PAGINA-->

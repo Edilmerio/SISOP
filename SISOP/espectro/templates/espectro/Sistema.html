@@ -1,0 +1,76 @@
+<div id="div_sistema" class="row form-inline">
+    {{ sistema_form.non_field_errors }}
+    <p><strong>Sistema:</strong></p>
+    <div class="form-group col-md-4">
+        {{ sistema_form.sistema.label_tag }}
+        {{ sistema_form.sistema }}
+        {{ sistema_form.sistema.errors }}
+    </div>
+    <div  class="form-group col-md-4" >
+        {{ tipo_sistema.tipo_sistema.label_tag }}
+        {{ tipo_sistema.tipo_sistema}}
+        {{ tipo_sistema.tipo_sistema.errors }}
+    </div>
+    <div class="form-group col-md-4">
+        {{ sistema_form.equipo.label_tag }}
+        {{ sistema_form.equipo}}
+        {{ sistema_form.equipo.errors }}
+    </div>
+
+</div>
+<div class="row form-inline" id="div_enlace">
+
+        <div class="col-md-8">
+            {{ sistema_form.enlace.label_tag }}
+            {{ sistema_form.enlace }}
+            {{ sistema_form.enlace.errors }}
+        </div>
+         <div class="col-md-4">
+            {{ sistema_form.esta_en_uso.label_tag }}
+            {{ sistema_form.esta_en_uso }}
+            {{ sistema_form.esta_en_uso.errors }}
+        </div>
+</div>
+<hr/>
+<div id=div_radios class="row">
+    {{ radio_formset.management_form }}
+    <p><strong>Radios:</strong></p>
+    {% for form in radio_formset %}
+        <div id="div_{{ form.prefix }}" class="row form-inline form-dinamico">
+            <div class="col-md-3">
+                <label for="name_inp_equipo">Equipo:</label>
+                <input type="text" class="form-control input-sm inp_equipo" readonly name="name_inp_equipo" >
+            </div>
+             {{ form.id }}
+            <div>
+                {{ form.DELETE }}
+            </div>
+            <!--
+            <div class="col-lg-2">
+                {{ form.sistema.label_tag }}
+                {{ form.sistema }}
+                {{ form.sistema.errors}}
+            </div>
+            -->
+            <div class="col-md-4">
+                {{ form.ubicacion.label_tag }}
+                {{ form.ubicacion }}
+                {{ form.ubicacion.errors}}
+            </div>
+            <div class="col-md-3">
+                {{ form.municipio.label_tag }}
+                {{ form.municipio }}
+                {{ form.municipio.errors}}
+            </div>
+            <div class="col-md-2">
+                <button id="btn_add_{{ form.prefix }}" type="button" class="btn btn-success btn-sm add-form">
+                    <i class="glyphicon glyphicon-plus"></i>
+                </button>
+                <button id="btn_delete_{{ form.prefix }}" type="button" class="btn btn-danger btn-sm delete-form">
+                    <i class="glyphicon glyphicon-minus"></i>
+                </button>
+
+            </div>
+         </div>
+    {%endfor%}
+</div>

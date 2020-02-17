@@ -1,0 +1,10 @@
+<form class="form-horizontal" action="{% url 'espectro:nueva_licencia' solicitud_id %}"
+      method="post" enctype="multipart/form-data" role="form" id="form_nueva_licencia">
+    {%csrf_token%}
+    <div class="row">
+        <div class="col-md-12" id="div_licencia">
+            {% include 'espectro/Licencia.html' %}
+        </div>
+    </div>
+    {% include 'general/Notificacion.html' %}
+</form>

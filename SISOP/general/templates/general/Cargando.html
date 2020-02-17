@@ -1,0 +1,10 @@
+{% load static %}
+<link href="{% static 'general/css/cargando.css'%}" rel="stylesheet" type="text/css"/>
+<div class="modal fade" tabindex="-1" role="dialog" id="modal_cargando" aria-labelledby="myModalLabel" data-backdrop="static" data-keyboard="false">
+	<div class="modal-dialog">  
+		{% comment %}
+		<img src="{% static 'general/fotos/cargando.gif'%}" />    
+		{% endcomment %}
+		<img src="{% static 'general/img/cargando.gif'%}" />
+	</div>
+</div>

@@ -1,0 +1,78 @@
+.logo {
+   color: #ddd;
+   float: left;
+   margin:3px auto auto 5px;
+   border-top:0px;
+}
+
+.user{
+	margin-top: 2px !important;
+}
+
+li.user a{
+   padding-bottom: 11px !important;   
+ }
+
+li.user i{
+   font-size: 14px;
+}
+
+.dropdown-menu {
+	margin-top:3px !important;	
+}
+
+.sidebar-toggler{
+	margin-bottom:20px;
+}
+
+
+.footer .footer-inner{
+	text-align: center;
+	float:none;
+	display:block;
+}
+
+input[readonly]{
+    background-color: #FFFFFF !important;
+    cursor: default;
+}
+
+.desabilitado{
+    opacity: 0.3;
+}
+
+.errorlist{
+    color: red;
+}
+
+.linea-gruesa{
+  border-top: 10px solid #E0DFDF;
+}
+
+#modal_general div.modal-header{
+    background-color: #555555;
+
+}
+
+#modal_general div.modal-header h4{
+    color: #ddd;
+    text-align: center;
+}
+
+li > a[disabled]{
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.loading-spinner1 {
+    background-color: #ffffff;
+    background-image: url('../img/ajax-loader.gif');
+    background-size: 16px 16px;
+    background-position:right center;
+    background-repeat: no-repeat;
+}
+
+#modal_cargando {
+    z-index: 10052 !important;
+}
+

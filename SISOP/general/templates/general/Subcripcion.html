@@ -1,0 +1,31 @@
+<div class="row">
+    <div class="col-md-offset-1">
+        <h4><strong>Informaciones que recibirá:</strong></h4>
+        <ul id="ul_info">
+            {% for info in info_ginfo %}
+                <li>{{ info }}</li>
+            {% endfor %}
+    </ul>
+    </div>
+</div>
+
+<form class="form-horizontal"  method="post" enctype="multipart/form-data" role="form" id="form_subcripcion">
+    {%csrf_token%}
+    <div class="row">
+        <div class="col-md-7 col-md-offset-1">
+            <label for="select_place_info" class="pull-left"><strong>De:&nbsp</strong></label>
+            <select id="select_place_info" class="selectpicker pull-left" multiple data-actions-box="true" data-width="75%"
+                    name="select_place_info"
+                data-deselect-all-text="Ninguno" data-select-all-text="Todos" data-none-selected-text="Ninguno">
+            {% for key, value in dict_info_show.items %}
+                <option {{value}} data-original-index="{{ value }}">{{key}}</option>
+            {% endfor %}
+        </select>
+        </div>
+    </div>
+</form>
+{% include 'general/Notificacion.html' %}
+
+
+
+{# action="{% url 'espectro:nueva_licencia' solicitud_id %}"#}

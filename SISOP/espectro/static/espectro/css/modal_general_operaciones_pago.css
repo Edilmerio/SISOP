@@ -1,0 +1,28 @@
+#modal_operaciones_pago .input-sm{
+    width: 100%;
+}
+#modal_operaciones_pago .form-dinamico{
+    margin-bottom: 3px;
+}
+
+#div_pago_sistemas{
+    margin-top: 10px;
+}
+
+#div_sistemas{
+    margin-top: 5px;
+    /*overflow-y: scroll;*/
+    /*overflow-x: hidden;*/
+}
+
+#div_sistemas div.checker{
+    display: none;
+}
+
+#div_modal_general_body{
+    /*height: 300px;*/
+}
+
+#div_container_pago{
+    margin-left: 5px;
+}

@@ -1,0 +1,88 @@
+<!--HEREDANDO DE LA PLANTILLA BASE-->
+{% extends 'general/Base.html' %}
+<!-- END HEREDANDO DE LA PLANTILLA BASE-->
+
+<!--ADICIONDO TITULO-->
+{% block titulo %}
+        Editar Sistema
+{% endblock %}
+<!--END ADICIONDO TITULO-->
+
+<!--ADICIONDO CSS, JS-->
+{% load static %}
+{% block css %}
+    <link href="{% static 'espectro/css/editar_sistema.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'espectro/css/sistema.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'espectro/css/solicitud.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'espectro/css/licencia.css' %}" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'espectro/scripts/sistema.js' %}" type="text/javascript"></script>
+    <script src="{% static 'espectro/scripts/solicitud.js' %}" type="text/javascript"></script>
+    <script src="{% static 'espectro/scripts/licencia.js' %}" type="text/javascript"></script>
+    <script src="{% static 'espectro/scripts/editar_sistema.js' %}" type="text/javascript"></script>
+    <script src="{% static 'espectro/scripts/modal_general_editar_sistema.js' %}" type="text/javascript"></script>
+
+{% endblock %}
+<!--END ADICIONDO CSS, JS-->
+
+<!--ADICIONANDO TITULO BREADCRUMB DE LA PAGINA-->>
+{% block title_page_breadcrumb %}
+<h3 class="page-title">	Editar Sistema </h3>
+
+<ul class="page-breadcrumb breadcrumb">
+	<li>
+		<i class="fa fa-home"></i>
+			<a href="{% url 'espectro:listado sistemas' 1%}">Espectro Radioeléctrico</a>
+		<i class="fa fa-angle-right"></i>
+	</li>
+	<li>
+		<a href="#">Editar Sistema</a>
+	</li>
+</ul>
+{% endblock %}
+<!--END ADICIONANDO TITULO BREADCRUMB DE LA PAGINA-->>
+
+<!-- ADICIONADO CONTENIDO DE LA PAGINA-->
+{% block content %}
+    <form class="form-horizontal" action="{% url 'espectro:editar_sistema' sistema.id %}" method="post"
+          enctype="multipart/form-data" role="form" id="form_pricipal">
+        {%csrf_token%}
+        <div class="row">
+            <div class="col-md-12">
+                {% include 'espectro/Sistema.html' %}
+            </div>
+        </div>
+        <hr/>
+         <div id="div_buttom_sistema_and_radios" class="row">
+            <div class="col-md-12">
+                <button class="btn btn-primary pull-right" id="id_btn_aceptar_sistema_and_radios" name="btn_aceptar_sistema_and_radios"
+                    {% if not perms.espectro.permisionario or not sistema_form.instance.division_territorial.identificativo == user.unidad_org %}
+                        disabled=""
+                    {% endif %}>
+                        <i class="fa fa-save"></i>
+                        Actualizar
+                </button>
+                <a class="btn btn-primary pull-right" id="id_btn_cancelar_sistema_and_radios" name="btn_cancelar_sistema_and_radios"
+                href='{% url 'espectro:editar_sistema' sistema.id %}'>
+                    Cancelar
+                </a>
+            </div>
+        </div>
+        <input type="hidden" name="tb_sol_page" id="ip_sol_page">
+        <input type="hidden" name="tb_lic_page" id="ip_lic_page">
+        <input type="hidden" name="id_row_marcada" id="ip_id_row_marcada">
+    </form>
+    <hr class="linea-gruesa">
+    <div id="div_sol_lic_parent">
+        {% include 'espectro/TablaSolicitudLicencia.html' %}
+    </div>
+{% endblock content %}
+
+
+<!-- END ADICIONADO CONTENIDO DE LA PAGINA-->
+
+<!--ADICIONADO NOTIFICACION DE LA PAGINA-->
+{% block notify %}{{ notify }}{% endblock %}
+<!--END ADICIONANDO NOTIFICACION DE LA PAGINA-->

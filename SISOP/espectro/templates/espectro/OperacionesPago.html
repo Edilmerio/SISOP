@@ -1,0 +1,9 @@
+<div class="container" id="div_container_pago">
+<form class="form-horizontal" action="{% url 'espectro:nuevo_pago' %}"
+      method="post" enctype="multipart/form-data" role="form" id="modal_operaciones_pago"
+      novalidate>
+    {%csrf_token%}
+    {% include 'espectro/Pago.html' %}
+    {% include 'general/Notificacion.html' %}
+</form>
+</div>

@@ -1,0 +1,25 @@
+{#{% load custom_filters %}#}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+    <h3>{{ saludos }}</h3>
+    <h3>{{ titulo }}</h3>
+    <hr>
+    <p></p>
+        {% for k, v in dict_data.items %}
+            <div style="margin-bottom: 5px">
+            {% for k1, v1 in v.items %}
+                {% if k1 != 'attach' and v1 %}
+                    <p><strong>{{ k1 | upper}}:&nbsp</strong>{{ v1 }}</p>
+                {% endif %}
+            {% endfor %}
+             <hr>
+            </div>
+        {% endfor %}
+        <p><strong>Saludos</strong></p>
+        <p><strong>Grupo Soporte a la Operación.DTLT</strong></p>
+    </body>
+</html>
