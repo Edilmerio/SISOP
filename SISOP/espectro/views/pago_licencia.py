@@ -74,7 +74,7 @@ class ListadoPago(LoginRequiredMixin, TemplateView):
             cant_elem = pagos_filter_loc.count()
             per_page = request.GET.get('per_pag', None)
             user_pref = UserPreference(request.user)
-            per_page = UserPreference.determine_value_preference(per_page, user_pref.per_page_list_sist_inst, self.per_page_list)[0]
+            per_page = UserPreference.determine_value_preference(per_page, user_pref.per_page_list_pago_lic, self.per_page_list)[0]
             user_pref.per_page_list_pago_lic = per_page
             int_per_page = cant_elem if per_page == 'todos' else int(per_page)
             page = utiles.pagina_valida(request.GET.get('page', 1), int_per_page, cant_elem)

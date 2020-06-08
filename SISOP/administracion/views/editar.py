@@ -14,7 +14,8 @@ class EditarPermisos(TemplateView):
 
     def __init__(self):
         self.apps_perms = [{'espectro': ['permisionario', 'visualizador_nacional']},
-                           {'administracion': ['administrador']}]
+                           {'administracion': ['administrador']},
+                           {'parte_diario': ['estadistico']}]
 
         super().__init__()
 

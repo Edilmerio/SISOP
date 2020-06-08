@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'general.apps.GeneralConfig',
     'espectro.apps.EspectroConfig',
     'administracion.apps.AdministracionConfig',
-    'django_tables2'
+    'django_tables2',
+    'parte_diario.apps.ParteDiarioConfig'
 ]
 
 MIDDLEWARE = [
@@ -51,6 +52,9 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = True
 
 ROOT_URLCONF = 'config.urls'
 
@@ -166,3 +170,8 @@ DEFAULT_FROM_EMAIL = 'Edilmerio Martinez Escobar <edilmerio.martinez@etecsa.cu>'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'node_modules')
 ]
+
+# Web server para el calculo de los indicadores
+WSDL_WEB_SERVER_INDICADORES = 'http://10.30.1.24/scrras/Service.asmx?WSDL'
+METHOD_PTE = 'Pendientes'
+METHOD_REP = 'Reparadas'
