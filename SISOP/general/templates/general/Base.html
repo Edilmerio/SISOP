@@ -159,6 +159,24 @@ License: You must have a valid license purchased only from themeforest(the above
                         </li>
                     </ul>
                 </li>
+                <li id="app_parte_diario">
+                    <a href="javascript:;">
+                        <i class="fa fa-newspaper-o"></i>
+                        <span class="title">
+                            Parte Diario
+                        </span>
+                        <span class="arrow">
+                        </span>
+                    </a>
+                    <ul class="sub-menu">
+                        <li id="app_parte_diario_indicadores">
+                            <a href="{% url 'parte_diario:indicadores'%}">
+                                <i class="fa fa-balance-scale"></i>
+                                Indicadores
+                            </a>
+                        </li>
+                    </ul>
+                </li>
                 {% if perms.administracion.administrador %}
                     <li id="app_administracion">
                         <a href="javascript:;">
@@ -189,7 +207,7 @@ License: You must have a valid license purchased only from themeforest(the above
 		<div class="page-content">			
 			<!-- BEGIN PAGE HEADER-->
 			<div class="row">
-				<div class="col-md-12">
+				<div class="col-md-12" id="div_title_breadcrumb">
 					<!-- BEGIN PAGE TITLE & BREADCRUMB-->
 					{% block title_page_breadcrumb %}{% endblock %}
 					<!-- END PAGE TITLE & BREADCRUMB-->

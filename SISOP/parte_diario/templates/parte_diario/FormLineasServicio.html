@@ -1,0 +1,31 @@
+<form class="form-horizontal" action="{% url 'parte_diario:lineas_servicio' %}"
+      method="post" enctype="multipart/form-data" role="form" id="form_actualizar_lineas_servicio">
+    {%csrf_token%}
+    <div class="row" id="div_actualizar_lineas_servicio">
+        {{ lineas_servicio_formset.management_form }}
+        {% for form in lineas_servicio_formset %}
+            <div id="div_{{ form.prefix }}" class="row form-inline form-dinamico">
+                {{ form.id }}
+                <div class="col-sm-2">
+                    {% if form.instance.centro_asociado_id %}
+                        {{ form.instance.centro_asociado.nombre }}
+                     {% else %}
+                        {{ form.cta }}
+                    {% endif %}
+                </div>
+                {{ form.centro_asociado }}
+                {{ form.fecha }}
+                <div class="col-sm-5">
+                    {{ form.abonado.label_tag }}
+                    {{ form.abonado }}
+                    {{ form.abonado.errors}}
+                </div>
+                <div class="col-sm-4">
+                    {{ form.datos.label_tag }}
+                    {{ form.datos }}
+                    {{ form.datos.errors}}
+                </div>
+            </div>
+        {%endfor%}
+    </div>
+</form>

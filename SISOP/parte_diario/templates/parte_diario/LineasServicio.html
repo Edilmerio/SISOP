@@ -1,0 +1,18 @@
+<h4 id="h4_lineas_servicio"><strong>Líneas es servicio por CTA:</strong></h4>
+<div class="row" id="div_parent_div_fecha_lineas">
+    <div id="div_fecha_lineas" class="col-sm-5 form-group pull-left row">
+            <label class="col-sm-2" for="fecha_lineas">Mes: </label>
+            <div class="input-group date input-group-sm col-sm-10" data-provide="datepicker" id="calendar_fecha_lineas">
+                <input type='text' id="fecha_lineas" class="form-control" readonly="" value="{{ current_mont }}" />
+                <div class="input-group-addon">
+                    <span class="fa fa-calendar"></span>
+                </div>
+            </div>
+    </div>
+</div>
+<input name="last_day_month" id="id_last_day_month" type="hidden" value="{{ last_day_month }}">
+<hr/>
+<div id="div_form_lineas_servicio">
+    {% include 'parte_diario/FormLineasServicio.html' %}
+</div>
+{% include 'general/Notificacion.html' %}

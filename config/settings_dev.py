@@ -3,10 +3,8 @@ import sys
 
 from .settings import *
 from . import utils
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 WSGI_APPLICATION = 'config.wsgi_dev.application'
 

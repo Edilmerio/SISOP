@@ -23,5 +23,6 @@ urlpatterns = [
     url(r'^general/', include('general.urls')),
     url(r'^espectro/', include('espectro.urls')),
     url(r'^auth/', include('auth_sisop.urls')),
-    url(r'^admin/', include('administracion.urls'))
+    url(r'^admin/', include('administracion.urls')),
+    url(r'^parte_diario/', include('parte_diario.urls'))
 ]

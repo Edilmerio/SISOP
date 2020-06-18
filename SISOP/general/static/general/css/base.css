@@ -25,6 +25,10 @@ li.user i{
 	margin-bottom:20px;
 }
 
+#div_title_breadcrumb{
+    margin-left: -15px;
+    padding-right: 0;
+}
 
 .footer .footer-inner{
 	text-align: center;

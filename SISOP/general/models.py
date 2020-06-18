@@ -57,4 +57,8 @@ class Subcripcion(models.Model):
     ginfo = models.ForeignKey(GInformacion, on_delete=models.CASCADE)
     centro_asociado = models.ForeignKey(CentroAsociado, on_delete=models.CASCADE)
 
+class CentralTelefonica(models.Model):
+    central = models.CharField(max_length=100, unique=True)
+    identificativo = models.CharField(max_length=50, null=True, unique=True)
+    centro_asociado = models.ForeignKey(CentroAsociado, on_delete=models.CASCADE, null=True)
 

@@ -1,8 +1,8 @@
-# celery -A SISOP worker -l info          start worker  (venv activo)
+# celery -A config worker -l info -P gevent          start worker  (venv activo)  celery purge
 # si no esta activado el venv J:\SISOPpy1.0\SISOP>"J:\SISOP\venvSISOP\Scripts\celery.exe" -A config  worker -l info
 # ctrl + c                                        stop worker
 
-# celery -A SISOP beat --loglevel=info    start beat
+# celery -A config beat --loglevel=info    start beat
 # si no esta activado el venv J:\SISOPpy1.0\SISOP>"J:\SISOP\venvSISOP\Scripts\celery.exe" -A config beat -l info
 
 # ctrl + c                                        stop beat
@@ -57,6 +57,21 @@ app.conf.beat_schedule = {
         # 'schedule': 5.0,
         'schedule': crontab(hour=4, minute=00, day_of_month='2'),
     },
+    'procesar_data_pte_rep': {
+        'task': 'parte_diario.tasks.procesar_data_pte_rep',
+        # 'schedule': 5.0,
+        'schedule': crontab(hour=22, minute=30, day_of_week='*')
+    },
+    'get_rep_web_server': {
+        'task': 'parte_diario.tasks.get_rep_web_server',
+        'schedule': 3300.0,
+        # 'schedule': crontab(minute=00, day_of_week='*')
+    },
+    'get_pend_web_server': {
+        'task': 'parte_diario.tasks.get_pend_web_server',
+        # 'schedule': 5.0,
+        'schedule': crontab(hour=22, minute=00, day_of_week='*')
+    }
 }
 
 def settings_from_xml():

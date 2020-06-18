@@ -1,0 +1,110 @@
+<!--HEREDANDO DE LA PLANTILLA BASE-->
+{% extends 'general/Base.html' %}
+<!-- END HEREDANDO DE LA PLANTILLA BASE-->
+<!--ADICIONDO CSS, JS-->
+
+<!--ADICIONDO TITULO-->
+{% block titulo %}
+    Indicadores
+{% endblock %}
+<!--END ADICIONDO TITULO-->
+{% load static %}
+{% block scripts %}
+    <script src="{% static 'parte_diario/scripts/indicadores.js' %}" type="text/javascript"></script>
+    <script src="{% static 'parte_diario/scripts/modal_general_lineas_servicio.js' %}" type="text/javascript"></script>
+{% endblock %}
+{% block css %}
+    <link href="{% static 'parte_diario/css/indicadores.css' %}" rel="stylesheet" type="text/css"/>
+{% endblock %}
+<!--END ADICIONDO CSS, JS-->
+
+<!--ADICIONANDO TITULO BREADCRUMB DE LA PAGINA-->>
+{% block title_page_breadcrumb %}
+    <div class="row">
+        <div class="col-md-6">
+            <h3 class="page-title">	Indicadores </h3>
+        </div>
+{#        <div class="col-md-6">#}
+{#            {% include 'general/ASubcripcion.html' with href_subcripcion='/general/subcripcion/0' %}#}
+{#        </div>#}
+    </div>
+    <div class="row">
+        <div class="col-md-10" id="div_breadcrumb">
+            <ul class="page-breadcrumb breadcrumb">
+                <li>
+                    <i class="fa fa-home"></i>
+                    <a href="{% url 'parte_diario:indicadores'%}">Parte Diario</a>
+                    <i class="fa fa-angle-right"></i>
+                </li>
+                <li>
+                    <a href="#">Indicadores</a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-2 actions">
+            <a class="btn btn-primary pull-right" href="{% url 'parte_diario:lineas_servicio'%}" id="a_actualizar_lineas_servicio"
+                    {% if not perms.parte_diario.estadistico %} disabled="" {% endif %}> Actualizar Líneas </a>
+        </div>
+    </div>
+{% endblock %}
+<!--END ADICIONANDO TITULO BREADCRUMB DE LA PAGINA-->>
+
+<!--ADICIONADO CONTENIDO DE LA PAGINA-->
+{% block content %}
+    <div class="row" id="div_encabezado_busqueda">
+    <ul class="nav nav-tabs">
+        <li class="active" id="li_ind_diario">
+            <a href="#" id="a_ind_diario">Indicadores Diarios</a>
+        </li>
+        <li id="li_ind_acumulado">
+            <a href="#" id="a_ind_acumulado">Indicadores Acumulados</a>
+        </li>
+        <!--<li><a href="#">Mensajes</a></li> -->
+    </ul>
+    <div class="row" id="div_fecha_ind">
+        <div id="div_fecha_inicio" class="col-sm-3 form-group pull-left">
+            <div class="row">
+                <label class="col-sm-2" for="fecha_inicio">De: </label>
+                <div class="input-group date input-group-sm col-sm-10" data-provide="datepicker" id="calendar_fecha_inicio">
+                    <input type='text' id="fecha_inicio" class="form-control" readonly="" value="{{ fecha_inicio }}"/>
+                    <div class="input-group-addon">
+                        <span class="fa fa-calendar"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="div_fecha_fin" class="col-sm-3 form-group pull-left">
+            <div class="row">
+                <label class="col-sm-2" for="fecha_fin">A: </label>
+                <div class="input-group date input-group-sm col-sm-10" data-provide="datepicker" id="calendar_fecha_fin">
+                    <input type='text' id="fecha_fin" class="form-control" readonly=""/>
+                    <div class="input-group-addon">
+                        <span class="fa fa-calendar"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-2 pull-left">
+            <button class="btn btn-sm btn-primary" id="btn_aceptar">Aceptar</button>
+        </div>
+        <div class="col-sm-3 pull-left" id="div_exportar">
+            <a href="#" class="btn-sm btn-primary pull-left" id="a_exportar">
+                <i class="fa fa-arrow-down"></i>
+                Exportar
+            </a>
+        </div>
+    </div>
+    <hr/>
+    {% include 'parte_diario/TablaIndicadores.html' %}
+    <input name="fecha_inicio_disponible" id="id_fecha_inicio_disponible" type="hidden" value={{ fecha_inicio_disponible }}>
+    <input name="fecha_fin_disponible" id="id_fecha_fin_disponible" type="hidden" value={{ fecha_fin_disponible }}>
+    <input name="fecha_inicio_export" id="id_fecha_inicio_export" type="hidden">
+    <input name="fecha_fin_export" id="id_fecha_fin_export" type="hidden">
+{% endblock %}
+<!-- END ADICIONADO CONTENIDO DE LA PAGINA-->
+
+<!--ADICIONADO NOTIFICACION DE LA PAGINA-->
+{% if notify %}
+    {% block notify %}{{ notify }}{% endblock %}
+{% endif %}
+<!--END ADICIONANDO NOTIFICACION DE LA PAGINA-->
