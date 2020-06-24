@@ -9,7 +9,7 @@ class IndicadoresTable(tables.Table):
     demora_prom = tables.Column(verbose_name='Dem Prom')
     sum_rep_lte_1d = tables.Column(verbose_name='Rep < 1d')
     por_ciento_rep_lte_1d = tables.Column(verbose_name='% Rep < 1d')
-    sum_rep_lte_3d = tables.Column(verbose_name='Rep < 3d')
+    sum_rep_lte_3d = tables.Column(verbose_name='1 < Rep < 3d')
     por_ciento_rep_lte_3d = tables.Column(verbose_name='% Rep < 3d')
     sum_rep_gt_3d = tables.Column(verbose_name='Rep > 3d')
     por_ciento_rep_gt_3d = tables.Column(verbose_name='% Rep > 3d')

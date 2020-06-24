@@ -222,15 +222,16 @@ class CalcularIndicadores:
              'demora_total': round(resultado['sum_demora_lte_1d'] + resultado['sum_demora_lte_3d'] + resultado['sum_demora_gt_3d'], 2),
              'lineas': lineas if lineas else 0
              })
+        sum_rep_lte_1d_rep_lte_3d = resultado['sum_rep_lte_1d'] + resultado['sum_rep_lte_3d']
         resultado.update(
             {'ri': resultado['rep_total'] + resultado['sum_pend'] - resultado['pend_dia_anterior'],
              'demora_prom': round((resultado['demora_total'] / resultado['rep_total'] if resultado['rep_total'] > 0 else 0.00), 2),
              'por_ciento_rep_lte_1d': round(
-                 (resultado['sum_rep_lte_1d'] * 100 / resultado['rep_total'] if resultado['sum_rep_lte_1d'] > 0 else 0.00), 2),
+                 (resultado['sum_rep_lte_1d'] * 100 / resultado['rep_total'] if resultado['rep_total'] > 0 else 100.00), 2),
              'por_ciento_rep_lte_3d': round(
-                 (resultado['sum_rep_lte_3d'] * 100 / resultado['rep_total'] if resultado['sum_rep_lte_3d'] > 0 else 0.00), 2),
+                 (sum_rep_lte_1d_rep_lte_3d * 100 / resultado['rep_total'] if resultado['rep_total'] > 0 else 100.00), 2),
              'por_ciento_rep_gt_3d': round(
-                 (resultado['sum_rep_gt_3d'] * 100 / resultado['rep_total'] if resultado['sum_rep_gt_3d'] > 0 else 0.00), 2),
+                 (resultado['sum_rep_gt_3d'] * 100 / resultado['rep_total'] if resultado['rep_total'] > 0 else 0.00), 2),
              'disponibilidad': round(
                  ((resultado['lineas'] - resultado['sum_pend']) * 100 / resultado['lineas'] if resultado['lineas'] > 0 else 0.00), 2)
              })
