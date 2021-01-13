@@ -12,7 +12,7 @@
     "bootstrap-select": "1.12.4",
     "font-awesome": "^4.7.0",
     "jquery": "^1.12.4",
-    "jquery-validation": "^1.19.1",
+    "jquery-validation": "^1.19.3",
     "pnotify": "^4.0.0"
   },
   "resolutions": {
