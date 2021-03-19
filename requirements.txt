@@ -12,7 +12,7 @@ defusedxml==0.6.0
 Django==3.0.2
 django-cors-headers==3.2.1
 django-tables2==2.2.1
-djangorestframework==3.11.0
+djangorestframework==3.11.2
 et-xmlfile==1.0.1
 gevent==20.5.0
 greenlet==0.4.15
