@@ -34,7 +34,7 @@ six==1.14.0
 sqlparse==0.3.0
 tablib==1.0.0
 tzlocal==2.0.0
-urllib3==1.25.9
+urllib3==1.26.5
 vine==1.3.0
 watchdog==0.10.2
 zeep==3.4.0
