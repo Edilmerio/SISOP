@@ -21,7 +21,7 @@ isodate==0.6.0
 jdcal==1.4.1
 kombu==4.6.7
 ldap3==2.6.1
-lxml==4.5.0
+lxml==4.6.5
 openpyxl==3.0.3
 pathtools==0.1.2
 psycopg2==2.8.4
